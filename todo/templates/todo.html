@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Se connecter</title>
+  <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font Awesome 5 Brands:wght@400&display=swap" />
+  <script src="https://kit.fontawesome.com/cb792c0850.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="signup-login">
+      <div>
+        <div>
+          <h5>Hello {{ user }} </h5>
+        </div>
+    <div class="signup-box">
+      <div class="heading">
+        Avoir les choses faites
+      </div>
+          <div class="anca"><a href="{% url 'signout' %}" class="sign">
+            <i class="fa-solid fa-right-from-bracket"></i></a></div>
+       
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" required class="inp" placeholder="Ajouter les tâches d'aujourd'hui" name="title">
+        <input type="submit" class="submit-button" value="Ajouter une tâche">
+      </form>
+        {% for todo in res %}
+        <div class="Todo">
+          {{ todo.srno }}
+          {{ todo.title }}
+          <div>
+            <a href="{% url 'edit_todo' todo.srno %}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'delete_todo' todo.srno %}"><i class="fa-solid fa-trash"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+    <script src="{% static 'js/todo.js' %}"></script>
+</body>
+
+</html>
